@@ -1,21 +1,6 @@
 import type { Config } from "@puckeditor/core";
 import { FieldLabel } from "@puckeditor/core";
 import { ChatAgent } from "@/components/chat/ChatAgent";
-import { ThemeProvider } from "@/components/theme/tailwind-theme"
-
-type Props = {
-  Agent: {
-    avatar: string;
-    title: string;
-    subtitle: string;
-    placeholder: string;
-    suggestions: { label: string; value: string }[];
-    enableImageUploads: string;
-    enableModelSelect: string;
-    llmModel: string;
-    apiKey: string;
-  };
-};
 
 const colorField = (label: string, defaultValue: string) => ({
   type: "custom" as const,
@@ -42,70 +27,29 @@ const colorField = (label: string, defaultValue: string) => ({
   ),
 });
 
+type Props = {
+  Agent: {
+    avatar: string;
+    title: string;
+    subtitle: string;
+    placeholder: string;
+    suggestions: { label: string; value: string }[];
+    enableImageUploads: string;
+    enableModelSelect: string;
+    llmModel: string;
+    apiKey: string;
+  };
+};
+
 export const config: Config<Props> = {
-  root: {
-    fields: {
-      primaryColor: colorField("Primary Color", "#1a1a1a"),
-      secondaryColor: colorField("Secondary Color", "#f5f5f5"),
-      fontHeader: {
-        label: "Header Font",
-        type: "select",
-        options: [
-          { label: "Inter", value: "Inter" },
-          { label: "Space Grotesk", value: "Space Grotesk" },
-          { label: "Playfair Display", value: "Playfair Display" },
-          { label: "Lato", value: "Lato" },
-          { label: "Roboto", value: "Roboto" },
-          { label: "Open Sans", value: "Open Sans" },
-          { label: "Montserrat", value: "Montserrat" },
-          { label: "Poppins", value: "Poppins" },
-          { label: "Raleway", value: "Raleway" },
-          { label: "Nunito", value: "Nunito" },
-          { label: "DM Sans", value: "DM Sans" },
-          { label: "Sora", value: "Sora" },
-        ],
-      },
-      fontBody: {
-        label: "Body Font",
-        type: "select",
-        options: [
-          { label: "Inter", value: "Inter" },
-          { label: "Space Grotesk", value: "Space Grotesk" },
-          { label: "Playfair Display", value: "Playfair Display" },
-          { label: "Lato", value: "Lato" },
-          { label: "Roboto", value: "Roboto" },
-          { label: "Open Sans", value: "Open Sans" },
-          { label: "Montserrat", value: "Montserrat" },
-          { label: "Poppins", value: "Poppins" },
-          { label: "Raleway", value: "Raleway" },
-          { label: "Nunito", value: "Nunito" },
-          { label: "DM Sans", value: "DM Sans" },
-          { label: "Sora", value: "Sora" },
-        ],
-      },
-    },
+  root: {    
     defaultProps: {
       title: "My App",
-      primaryColor: "#1a1a1a",
-      secondaryColor: "#f5f5f5",
-      fontHeader: "Inter",
-      fontBody: "Inter",
     },
     render: ({
       children,
-      primaryColor,
-      secondaryColor,
-      fontHeader,
-      fontBody,
     }) => (
-      <ThemeProvider
-        primaryColor={primaryColor || undefined}
-        secondaryColor={secondaryColor || undefined}
-        fontHeader={fontHeader || undefined}
-        fontBody={fontBody || undefined}
-      >
-        {children}
-      </ThemeProvider>
+      children
     ),
   },
   components: {
