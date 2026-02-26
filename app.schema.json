@@ -13,6 +13,7 @@
       {
         "type": "Agent",
         "props": {
+          "id": "agent-1",
           "icon": "",
           "title": "How can I help you today?",
           "subtitle": "Start a conversation or try one of the suggestions below",

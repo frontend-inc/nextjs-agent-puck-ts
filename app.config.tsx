@@ -1,7 +1,7 @@
 import type { Config } from "@puckeditor/core";
 import { FieldLabel } from "@puckeditor/core";
 import { ChatAgent } from "@/components/chat/ChatAgent";
-import { ThemeProvider } from "@/components/tailwind-theme"
+import { ThemeProvider } from "@/components/theme/tailwind-theme"
 
 type Props = {
   Agent: {
