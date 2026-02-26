@@ -40,6 +40,8 @@ interface ChatInputProps {
   placeholder?: string;
   selectedModel?: string;
   onModelChange?: (model: string) => void;
+  enableModelSelect?: boolean;
+  enableAttachments?: boolean;
 }
 
 export function ChatInput({
@@ -50,6 +52,8 @@ export function ChatInput({
   placeholder,
   selectedModel: controlledModel,
   onModelChange,
+  enableModelSelect = true,
+  enableAttachments = true,
 }: ChatInputProps) {
   const [modelSelectorOpen, setModelSelectorOpen] = useState(false);
   const [internalModel, setInternalModel] = useState(DEFAULT_MODEL_ID);
@@ -68,11 +72,13 @@ export function ChatInput({
 
   return (
     <PromptInput globalDrop multiple onSubmit={onSubmit}>
-      <PromptInputHeader>
-        <PromptInputAttachments>
-          {(attachment) => <PromptInputAttachment data={attachment} />}
-        </PromptInputAttachments>
-      </PromptInputHeader>
+      {enableAttachments && (
+        <PromptInputHeader>
+          <PromptInputAttachments>
+            {(attachment) => <PromptInputAttachment data={attachment} />}
+          </PromptInputAttachments>
+        </PromptInputHeader>
+      )}
       <PromptInputBody>
         <PromptInputTextarea
           onChange={(event) => onChange(event.target.value)}
@@ -82,50 +88,54 @@ export function ChatInput({
       </PromptInputBody>
       <PromptInputFooter>
         <PromptInputTools>
-          <PromptInputActionMenu>
-            <PromptInputActionMenuTrigger>
-              <PlusIcon className="size-4" />
-            </PromptInputActionMenuTrigger>
-            <PromptInputActionMenuContent>
-              <PromptInputActionAddAttachments />
-            </PromptInputActionMenuContent>
-          </PromptInputActionMenu>
-          <ModelSelector
-            onOpenChange={setModelSelectorOpen}
-            open={modelSelectorOpen}
-          >
-            <ModelSelectorTrigger asChild>
-              <PromptInputButton>
-                {selectedModelData?.chefSlug && (
-                  <ModelSelectorLogo provider={selectedModelData.chefSlug} />
-                )}
-                {selectedModelData?.name && (
-                  <ModelSelectorName>{selectedModelData.name}</ModelSelectorName>
-                )}
-              </PromptInputButton>
-            </ModelSelectorTrigger>
-            <ModelSelectorContent>
-              <ModelSelectorList>
-                <ModelSelectorGroup heading="OpenAI">
-                  {models.map((m) => (
-                    <ModelSelectorItem
-                      key={m.id}
-                      onSelect={() => handleModelSelect(m.id)}
-                      value={m.id}
-                    >
-                      <ModelSelectorLogo provider={m.chefSlug} />
-                      <ModelSelectorName>{m.name}</ModelSelectorName>
-                      {selectedModel === m.id ? (
-                        <CheckIcon className="ml-auto size-4" />
-                      ) : (
-                        <div className="ml-auto size-4" />
-                      )}
-                    </ModelSelectorItem>
-                  ))}
-                </ModelSelectorGroup>
-              </ModelSelectorList>
-            </ModelSelectorContent>
-          </ModelSelector>
+          {enableAttachments && (
+            <PromptInputActionMenu>
+              <PromptInputActionMenuTrigger>
+                <PlusIcon className="size-4" />
+              </PromptInputActionMenuTrigger>
+              <PromptInputActionMenuContent>
+                <PromptInputActionAddAttachments />
+              </PromptInputActionMenuContent>
+            </PromptInputActionMenu>
+          )}
+          {enableModelSelect && (
+            <ModelSelector
+              onOpenChange={setModelSelectorOpen}
+              open={modelSelectorOpen}
+            >
+              <ModelSelectorTrigger asChild>
+                <PromptInputButton>
+                  {selectedModelData?.chefSlug && (
+                    <ModelSelectorLogo provider={selectedModelData.chefSlug} />
+                  )}
+                  {selectedModelData?.name && (
+                    <ModelSelectorName>{selectedModelData.name}</ModelSelectorName>
+                  )}
+                </PromptInputButton>
+              </ModelSelectorTrigger>
+              <ModelSelectorContent>
+                <ModelSelectorList>
+                  <ModelSelectorGroup heading="OpenAI">
+                    {models.map((m) => (
+                      <ModelSelectorItem
+                        key={m.id}
+                        onSelect={() => handleModelSelect(m.id)}
+                        value={m.id}
+                      >
+                        <ModelSelectorLogo provider={m.chefSlug} />
+                        <ModelSelectorName>{m.name}</ModelSelectorName>
+                        {selectedModel === m.id ? (
+                          <CheckIcon className="ml-auto size-4" />
+                        ) : (
+                          <div className="ml-auto size-4" />
+                        )}
+                      </ModelSelectorItem>
+                    ))}
+                  </ModelSelectorGroup>
+                </ModelSelectorList>
+              </ModelSelectorContent>
+            </ModelSelector>
+          )}
         </PromptInputTools>
         <PromptInputSubmit
           disabled={!value.trim() || status === "streaming"}

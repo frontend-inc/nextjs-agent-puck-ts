@@ -7,7 +7,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Suggestion } from "@/components/ai-elements/suggestion";
 
 export interface PromptSuggestion {
-  key: string;
+  label: string;
   value: string;
 }
 
@@ -19,23 +19,29 @@ interface ChatPromptProps {
   suggestions?: PromptSuggestion[];
   selectedModel?: string;
   onModelChange?: (model: string) => void;
+  title?: string;
+  subtitle?: string;
+  avatar?: React.ReactNode;
+  placeholder?: string;
+  enableModelSelect?: boolean;
+  enableAttachments?: boolean;
 }
 
 const defaultSuggestions: PromptSuggestion[] = [
   {
-    key: "Write a story",
+    label: "Write a story",
     value: "Write a short creative story about a robot learning to paint",
   },
   {
-    key: "Explain a concept",
+    label: "Explain a concept",
     value: "Explain quantum computing in simple terms that anyone can understand",
   },
   {
-    key: "Help me code",
+    label: "Help me code",
     value: "Help me write a function that calculates the fibonacci sequence",
   },
   {
-    key: "Plan a trip",
+    label: "Plan a trip",
     value: "Help me plan a 5-day itinerary for visiting Tokyo, Japan",
   },
 ];
@@ -48,6 +54,12 @@ export function ChatPrompt({
   suggestions = defaultSuggestions,
   selectedModel,
   onModelChange,
+  title,
+  subtitle,
+  avatar,
+  placeholder,
+  enableModelSelect,
+  enableAttachments,
 }: ChatPromptProps) {
   const handleSuggestionClick = (suggestion: string) => {
     onChange(suggestion);
@@ -57,15 +69,17 @@ export function ChatPrompt({
     <div className="flex h-screen flex-col items-center justify-center gap-6 p-4">
       <div className="space-y-3 text-center">
         <div className="flex items-center justify-center gap-2 text-primary">
-          <div className="flex items-center justify-center size-12 rounded-xl bg-primary">
-            <RiOpenaiLine className="size-6 text-primary-offset animate-pulse" />
-          </div>
+          {avatar ?? (
+            <div className="flex items-center justify-center size-12 rounded-xl bg-primary">
+              <RiOpenaiLine className="size-6 text-primary-offset animate-pulse" />
+            </div>
+          )}
         </div>
         <Shimmer as="h1" className="text-3xl font-bold tracking-tight">
-          How can I help you today?
+          {title ?? "How can I help you today?"}
         </Shimmer>
         <p className="text-muted-foreground">
-          Start a conversation or try one of the suggestions below
+          {subtitle ?? "Start a conversation or try one of the suggestions below"}
         </p>
       </div>
 
@@ -75,16 +89,19 @@ export function ChatPrompt({
           onChange={onChange}
           onSubmit={onSubmit}
           status={status}
+          placeholder={placeholder}
           selectedModel={selectedModel}
           onModelChange={onModelChange}
+          enableModelSelect={enableModelSelect}
+          enableAttachments={enableAttachments}
         />
       </div>
 
       <div className="flex flex-wrap justify-center gap-2">
         {suggestions.map((suggestion) => (
           <Suggestion
-            key={suggestion.key}
-            suggestion={suggestion.key}
+            key={suggestion.label}
+            suggestion={suggestion.label}
             onClick={() => handleSuggestionClick(suggestion.value)}
           />
         ))}

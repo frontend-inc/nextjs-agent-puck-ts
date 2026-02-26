@@ -21,10 +21,24 @@ import {
 } from '@/components/ui/sidebar';
 
 interface ChatAgentProps {
+  title?: string;
+  subtitle?: string;
+  avatar?: React.ReactNode;
+  placeholder?: string;
+  enableModelSelect?: boolean;
+  enableAttachments?: boolean;
   suggestions?: PromptSuggestion[];
 }
 
-export function ChatAgent({ suggestions }: ChatAgentProps) {
+export function ChatAgent({
+  title,
+  subtitle,
+  avatar,
+  placeholder,
+  enableModelSelect = true,
+  enableAttachments = true,
+  suggestions,
+}: ChatAgentProps) {
   const [inputValue, setInputValue] = useState('');
   const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL_ID);
   const [chatId, setChatId] = useState<string | null>(null);
@@ -254,6 +268,12 @@ export function ChatAgent({ suggestions }: ChatAgentProps) {
               suggestions={suggestions}
               selectedModel={selectedModel}
               onModelChange={setSelectedModel}
+              title={title}
+              subtitle={subtitle}
+              avatar={avatar}
+              placeholder={placeholder}
+              enableModelSelect={enableModelSelect}
+              enableAttachments={enableAttachments}
             />
           </div>
         ) : (
@@ -274,8 +294,11 @@ export function ChatAgent({ suggestions }: ChatAgentProps) {
                   onChange={setInputValue}
                   onSubmit={handleSendMessage}
                   status={chatStatus}
+                  placeholder={placeholder}
                   selectedModel={selectedModel}
                   onModelChange={setSelectedModel}
+                  enableModelSelect={enableModelSelect}
+                  enableAttachments={enableAttachments}
                 />
               </div>
             </div>
