@@ -2,7 +2,7 @@
 
 import type { ChatStatus } from "ai";
 import { ChatInput, type PromptInputMessage } from "./ChatInput";
-import { RiOpenaiLine } from "@remixicon/react";
+import { RiRobot2Line } from "@remixicon/react";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Suggestion } from "@/components/ai-elements/suggestion";
 
@@ -71,7 +71,7 @@ export function ChatPrompt({
         <div className="flex items-center justify-center gap-2 text-primary">
           {avatar ?? (
             <div className="flex items-center justify-center size-12 rounded-xl bg-primary">
-              <RiOpenaiLine className="size-6 text-primary-offset animate-pulse" />
+              <RiRobot2Line className="size-6 text-primary-foreground" />
             </div>
           )}
         </div>
