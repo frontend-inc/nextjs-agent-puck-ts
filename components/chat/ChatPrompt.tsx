@@ -75,7 +75,7 @@ export function ChatPrompt({
             </div>
           )}
         </div>
-        <Shimmer as="h1" className="text-3xl font-bold tracking-tight">
+        <Shimmer as="h1" className="text-3xl font-bold tracking-tight font-heading">
           {title ?? "How can I help you today?"}
         </Shimmer>
         <p className="text-muted-foreground">
