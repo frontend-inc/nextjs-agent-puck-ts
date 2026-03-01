@@ -1,0 +1,54 @@
+{
+  "fields": {
+    "avatar": { "label": "Avatar URL", "type": "text" },
+    "title": { "label": "Title", "type": "text", "contentEditable": true },
+    "subtitle": { "label": "Subtitle", "type": "text", "contentEditable": true },
+    "placeholder": { "label": "Placeholder", "type": "text" },
+    "suggestions": {
+      "label": "Suggestions",
+      "type": "array",
+      "arrayFields": {
+        "label": { "type": "text" },
+        "value": { "type": "text" }
+      },
+      "defaultItemProps": { "label": "Suggestion", "value": "Suggestion" },
+      "getItemSummary": "item.label || 'Empty suggestion'"
+    },
+    "enableImageUploads": {
+      "label": "Enable Image Uploads",
+      "type": "radio",
+      "options": [
+        { "label": "Yes", "value": "true" },
+        { "label": "No", "value": "false" }
+      ]
+    },
+    "enableModelSelect": {
+      "label": "Enable Model Select",
+      "type": "radio",
+      "options": [
+        { "label": "Yes", "value": "true" },
+        { "label": "No", "value": "false" }
+      ]
+    },
+    "llmModel": {
+      "label": "LLM Model",
+      "type": "select",
+      "options": [
+        { "label": "Claude Haiku 4.5", "value": "anthropic/claude-haiku-4.5" },
+        { "label": "Claude Sonnet 4.6", "value": "anthropic/claude-sonnet-4.6" }
+      ]
+    },
+    "apiKey": { "label": "API Key", "type": "text" }
+  },
+  "defaultProps": {
+    "avatar": "",
+    "title": "How can I help you today?",
+    "subtitle": "Start a conversation or try one of the suggestions below",
+    "placeholder": "Type a message...",
+    "suggestions": [],
+    "enableImageUploads": "true",
+    "enableModelSelect": "true",
+    "llmModel": "anthropic/claude-haiku-4.5",
+    "apiKey": ""
+  }
+}
