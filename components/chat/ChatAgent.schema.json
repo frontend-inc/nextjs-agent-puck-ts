@@ -1,4 +1,5 @@
 {
+  "name": "ChatAgent",  
   "fields": {
     "avatar": { "label": "Avatar URL", "type": "text" },
     "title": { "label": "Title", "type": "text", "contentEditable": true },
