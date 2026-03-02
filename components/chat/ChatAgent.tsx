@@ -30,7 +30,7 @@ interface ChatAgentProps {
   suggestions?: PromptSuggestion[];
 }
 
-export function ChatAgent({
+export default function ChatAgent({
   title,
   subtitle,
   avatar,

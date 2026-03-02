@@ -1,4 +1,4 @@
-export { ChatAgent } from "./ChatAgent";
+export { default as ChatAgent } from "./ChatAgent";
 export { ChatInput } from "./ChatInput";
 export { ChatMessages } from "./ChatMessages";
 export { ChatPrompt } from "./ChatPrompt";

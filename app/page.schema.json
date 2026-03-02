@@ -6,7 +6,7 @@
   },
   "content": [
     {
-      "type": "Agent",
+      "type": "ChatAgent",
       "props": {
         "id": "agent-1",
         "icon": "",

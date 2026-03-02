@@ -12,8 +12,7 @@
         "label": { "type": "text" },
         "value": { "type": "text" }
       },
-      "defaultItemProps": { "label": "Suggestion", "value": "Suggestion" },
-      "getItemSummary": "item.label || 'Empty suggestion'"
+      "defaultItemProps": { "label": "Suggestion", "value": "Suggestion" }
     },
     "enableImageUploads": {
       "label": "Enable Image Uploads",
